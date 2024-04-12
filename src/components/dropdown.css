@@ -1,0 +1,21 @@
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.dropdown-menu {
+  max-height: 90vh; /* Set a maximum height for the dropdown menu */
+  overflow-y: auto; /* Enable vertical scrolling */
+  font-size: x-small;
+  background: gray;
+
+}
+.dropdown-menu .dropdown-item {
+  color: white;
+}
+
+.dropdown .btn {
+  padding: 0.25rem 0.5rem; /* Adjust padding as needed */
+  font-size: smaller; /* Decrease font size */
+}
+

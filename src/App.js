@@ -1,24 +1,33 @@
-import logo from './logo.svg';
+import { useState, useEffect } from 'react';
 import './App.css';
+import Background from './components/Background';
+import  Nav  from './components/Nav';
 
 function App() {
+    const [selectedCountry, setSelectedCountry] = useState("India")
+    const [fullData, setFullData] = useState([]);
+    const [data, setData] = useState([]);
+
+   const getCovidData = async () => {
+     try {
+       const res = await fetch("https://data.covid19india.org/data.json");
+       const fullData = await res.json();
+       setFullData(fullData.statewise[0]);
+       setData(fullData.statewise);
+     } catch (error) {
+       console.log(error);
+     }
+   };
+
+   useEffect(() => {
+     getCovidData();
+   }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Nav data={data} setSelectedCountry={setSelectedCountry} />
+      <Background fullData={fullData} selectedCountry={selectedCountry} />
+    </>
   );
 }
 
